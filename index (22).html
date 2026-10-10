@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Expense Tracker</title>
+  <meta name="description" content="Track income and expenses, see your balance, and keep your data in the browser.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <h1>Expense Tracker</h1>
+      <p id="today"></p>
+    </header>
+
+    <main class="dashboard">
+      <section class="hero" aria-labelledby="balance-label">
+        <p class="hero__label" id="balance-label">Current balance</p>
+        <p class="balance" id="balance">$0.00</p>
+        <div class="split" role="img" aria-label="Income compared with expenses">
+          <span class="split__in" id="bar-income"></span>
+          <span class="split__out" id="bar-expense"></span>
+        </div>
+        <dl class="stats">
+          <div><dt><i class="dot dot--in"></i>Income</dt><dd id="total-income">$0.00</dd></div>
+          <div><dt><i class="dot dot--out"></i>Expenses</dt><dd id="total-expense">$0.00</dd></div>
+        </dl>
+      </section>
+
+      <section class="panel form-panel" aria-labelledby="form-title">
+        <h2 id="form-title">New transaction</h2>
+        <form id="tx-form" novalidate>
+          <div class="segment" role="radiogroup" aria-label="Transaction type">
+            <input type="radio" name="type" id="type-expense" value="expense" checked>
+            <label for="type-expense">Expense</label>
+            <input type="radio" name="type" id="type-income" value="income">
+            <label for="type-income">Income</label>
+          </div>
+
+          <div class="field">
+            <label for="description">Description</label>
+            <input type="text" id="description" maxlength="60" autocomplete="off" placeholder="e.g. Groceries" aria-describedby="description-error">
+            <p class="error" id="description-error" hidden></p>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="amount">Amount</label>
+              <div class="affix">
+                <span id="currency-symbol">$</span>
+                <input type="number" id="amount" step="0.01" min="0.01" inputmode="decimal" placeholder="0.00" aria-describedby="amount-error">
+              </div>
+              <p class="error" id="amount-error" hidden></p>
+            </div>
+            <div class="field">
+              <label for="date">Date</label>
+              <input type="date" id="date" aria-describedby="date-error">
+              <p class="error" id="date-error" hidden></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="category">Category</label>
+            <select id="category" aria-describedby="category-error"></select>
+            <p class="error" id="category-error" hidden></p>
+          </div>
+
+          <button type="submit" class="btn">Add transaction</button>
+        </form>
+      </section>
+
+      <section class="panel list-panel" aria-labelledby="list-title">
+        <div class="list-head">
+          <h2 id="list-title">Transactions</h2>
+          <div class="tabs" role="group" aria-label="Filter transactions">
+            <button type="button" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" data-filter="income" aria-pressed="false">Income</button>
+            <button type="button" data-filter="expense" aria-pressed="false">Expenses</button>
+          </div>
+        </div>
+        <ul class="tx-list" id="tx-list"></ul>
+        <p class="empty" id="empty" hidden></p>
+      </section>
+    </main>
+
+    <footer class="footer">Developed by <strong>HANIA BATOOL</strong></footer>
+  </div>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
